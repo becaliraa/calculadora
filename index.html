@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<title>Calculadora</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		body {
+			background: #f9f9f9;
+			font-family: Arial, sans-serif;
+		}
+
+		.calculator {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			background: #979595;
+			border-radius: 10px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			padding: 20px;
+			width: 100%;
+			max-width: 350px;
+			margin: 40px auto;
+		}
+
+		.calculator input {
+			width: 100%;
+			margin-bottom: 10px;
+			padding: 15px;
+			font-size: 24px;
+			border-radius: 5px;
+			border: none;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+			text-align: right;
+			transition: background-color 0.3s ease;
+		}
+
+		.calculator .buttons {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 10px;
+			margin-top: 10px;
+		}
+
+		.calculator .buttons button {
+			height: 60px;
+			font-size: 20px;
+			font-weight: bold;
+			border-radius: 5px;
+			border: none;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+			cursor: pointer;
+			transition: background-color 0.3s ease, transform 0.3s ease;
+		}
+
+		.calculator .buttons button.number {
+			background-color: #090266d2;
+			color: #ffffff;
+		}
+
+		.calculator .buttons button.operator {
+			background-color: #1a05d8e1;
+			color: #ffffff;
+		}
+
+		.calculator .buttons button.equal {
+			grid-column: span 2;
+			background-color: #07052c;
+			color: #ffffff;
+		}
+
+		.calculator .buttons button.special {
+			background-color: #1588e7;
+			color: #ffffff;
+		}
+
+		.calculator .buttons button:hover {
+			background-color: #d4d4d4;
+			transform: scale(1.05);
+		}
+
+		.calculator .buttons button:active {
+			background-color: #c2c2c2;
+			transform: scale(0.95);
+		}
+	</style>
+	<script>
+		function updateInput(value) {
+            var resultInput = document.getElementById('result');
+            resultInput.value += value;
+            resultInput.focus();
+        }
+
+        function calculate() {
+            var resultInput = document.getElementById('result');
+            try {
+                var result = eval(resultInput.value);
+                resultInput.value = result;
+            } catch (error) {
+                resultInput.value = 'Erro';
+            }
+        }
+
+        function clearInput() {
+            var resultInput = document.getElementById('result');
+            resultInput.value = '';
+            resultInput.focus();
+        }
+	</script>
+</head>
+
+<body>
+	<div class="calculator">
+		<input id="result" type="text" placeholder="0" readonly>
+		<div class="buttons">
+			<button class="special" onclick="updateInput('Math.PI')">π</button>
+			<button class="special" onclick="updateInput('Math.E')">e</button>
+			<button class="special" onclick="updateInput('Math.sqrt(')">√</button>
+			<button class="special" onclick="updateInput('Math.pow(')">x^y</button>
+			<button class="number" onclick="updateInput('7')">7</button>
+			<button class="number" onclick="updateInput('8')">8</button>
+			<button class="number" onclick="updateInput('9')">9</button>
+			<button class="operator" onclick="updateInput('/')">÷</button>
+			<button class="number" onclick="updateInput('4')">4</button>
+			<button class="number" onclick="updateInput('5')">5</button>
+			<button class="number" onclick="updateInput('6')">6</button>
+			<button class="operator" onclick="updateInput('*')">×</button>
+			<button class="number" onclick="updateInput('1')">1</button>
+			<button class="number" onclick="updateInput('2')">2</button>
+			<button class="number" onclick="updateInput('3')">3</button>
+			<button class="operator" onclick="updateInput('-')">-</button>
+			<button class="number" onclick="updateInput('0')">0</button>
+			<button class="number" onclick="updateInput('.')">.</button>
+			<button class="equal" onclick="calculate()">=</button>
+			<button class="operator" onclick="updateInput('+')">+</button>
+			<button onclick="clearInput()">Limpar</button>
+		</div>
+	</div>
+</body>
+
+</html>
